@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f3f8ff, #e5f2ff);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(199, 197, 197, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      transform: scale(0.7);
+      animation: scaleIn 0.5s forwards;
+      max-width: 90%;
+      width: 400px;
+    }
+
+    .modal h2 {
+      color: #302b63;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .modal button {
+      background: #4ee44e;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal button:hover {
+      transform: scale(1.1);
+      background: #45cc45;
+    }
+
+    /* Savings Story Page Styles */
+    .savings-story {
+      display: none;
+      max-width: 800px;
+      margin: 20px;
+      background: rgba(125, 125, 125, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      color: black;
+      text-align: center;
+      animation: slideUp 0.8s forwards;
+    }
+
+    .savings-story h1 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #4ee44e;
+      text-shadow: 0 0 10px rgba(78, 228, 78, 0.5);
+    }
+
+    .savings-chart {
+      width: 100%;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      margin: 20px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .savings-bar {
+      position: absolute;
+      bottom: 0;
+      width: 60px;
+      background: linear-gradient(to top, #4ee44e, #45cc45);
+      border-radius: 10px 10px 0 0;
+      transition: height 1s ease;
+    }
+
+    .savings-story p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 20px 0;
+    }
+
+    .continue-btn {
+      background: #4ee44e;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .continue-btn:hover {
+      transform: scale(1.1);
+      background: #45cc45;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      to { transform: scale(1); }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .savings-amount {
+      font-size: 24px;
+      font-weight: bold;
+      color: #202120;
+      margin: 20px 0;
+    }
+
+    .star-decoration {
+      position: absolute;
+      opacity: 0.5;
+      animation: twinkle 1.5s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    img{
+      object-fit: contain;
+      width: 400px;
+      height: 400px;
+    }
+     
+  </style>
+</head>
+<body class="body">
+   <!-- Initial Modal -->
+  <div class="modal" id="initialModal">
+    <div class="modal-content">
+      <h2>✨ Check This Out First! ✨</h2>
+      <p>Let me show you what I've been doing with my savings before we look at the school list!</p>
+      <button onclick="showSavingsStory()">Let's See! 👀</button>
+    </div>
+  </div>
+
+  <!-- Savings Story Page -->
+  <div class="savings-story" id="savingsStory">
+    <h1>My finace Journey 💰</h1>
+    
+    <div class="savings-chart">
+      <div class="savings-bar" style="left: 100px; height: 50px;" data-amount="5000000"></div>
+      <div class="savings-bar" style="left: 200px; height: 100px;" data-amount="70000"></div>
+      <div class="savings-bar" style="left: 300px; height: 150px;" data-amount="10000000"></div>
+      <div class="savings-bar" style="left: 400px; height: 200px;" data-amount="20000"></div>
+      <img src="/assets/image.png" />
+
+     </div>
+
+    <div class="savings-amount">Total Saved: ₦<span id="savingsCounter">0</span></div>
+ 
+    <p> 👋So, I plan to use the money I've saved up to buy a laptop power bank and a few other essentials. This is my final year in school, and I'm truly sorry for still bothering you. Thank you so much for everything you've done—I deeply appreciate it. 🎉</p>
+
+    <button class="continue-btn" onclick="showMainPage()">Click to see school List! 🛍️</button>
+  </div>
+
+  <script>
+    // Create animated stars
+    function createStars() {
+      for (let i = 0; i < 20; i++) {
+        const star = document.createElement('div');
+        star.className = 'star-decoration';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.innerHTML = '⭐';
+        star.style.animationDelay = Math.random() * 2 + 's';
+        document.body.appendChild(star);
+      }
+    }
+
+    // Animate savings counter
+    function animateCounter(target) {
+      let current = 0;
+      const increment = target / 100;
+      const counter = document.getElementById('savingsCounter');
+      
+      const interval = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(interval);
+        }
+        counter.textContent = '125,000'
+      }, 20);
+    }
+
+    // Show savings story
+    function showSavingsStory() {
+      document.getElementById('initialModal').style.display = 'none';
+      const savingsStory = document.getElementById('savingsStory');
+      savingsStory.style.display = 'block';
+
+      // Animate the bars
+      const bars = document.querySelectorAll('.savings-bar');
+      bars.forEach(bar => {
+        setTimeout(() => {
+          bar.style.height = bar.getAttribute('data-height');
+        }, 500);
+      });
+
+      // Start the counter animation
+      animateCounter(500);
+    }
+
+    // Show main page
+    function showMainPage() {
+      window.location.href = 'index2.html'; // Replace with your main page URL
+    }
+
+    // Initialize
+    createStars();
+  </script>
+</body>
+</html>

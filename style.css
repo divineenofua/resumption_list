@@ -1,0 +1,355 @@
+ /* * {
+     box-sizing: border-box;
+     font-family: 'Arial', sans-serif;
+ }
+
+ body {
+     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+     min-height: 100vh;
+     margin: 0;
+     padding: 20px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .container {
+     background: white;
+     border-radius: 15px;
+     padding: 20px;
+     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+     width: 90%;
+     max-width: 600px;
+     transform-origin: top;
+     animation: dropIn 0.6s ease-out;
+ }
+
+ .text {
+     display: flex;
+     justify-content: space-between;
+     width: 100%;
+ }
+
+ .total {
+     text-align: right;
+     font-size: 30px;
+
+ }
+
+ h1 {
+     color: #2c3e50;
+     text-align: center;
+     margin-bottom: 30px;
+     animation: fadeIn 1s ease-out;
+ }
+
+ .item {
+     display: flex;
+     align-items: center;
+     padding: 15px;
+     margin: 10px 0;
+     border-radius: 10px;
+     background: #f8f9fa;
+     transform-origin: left;
+     transition: all 0.3s ease;
+     cursor: pointer;
+ }
+
+ .item:hover {
+     transform: scale(1.02);
+     background: #e9ecef;
+ }
+
+ .item.checked {
+     background: #d4edda;
+     text-decoration: line-through;
+     color: #666;
+ }
+
+ .checkbox {
+     width: 20px;
+     height: 20px;
+     margin-right: 15px;
+     border: 2px solid #6c757d;
+     border-radius: 5px;
+     display: inline-block;
+     position: relative;
+     transition: all 0.3s ease;
+ }
+
+ .checked .checkbox {
+     background: #28a745;
+     border-color: #28a745;
+ }
+
+ .checkbox::after {
+     content: '✓';
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     color: white;
+     opacity: 0;
+     transition: opacity 0.2s;
+ }
+
+ .checked .checkbox::after {
+     opacity: 1;
+ }
+
+ .progress-bar {
+     width: 100%;
+     height: 10px;
+     background: #e9ecef;
+     border-radius: 5px;
+     margin: 20px 0;
+     overflow: hidden;
+ }
+
+ .progress {
+     height: 100%;
+     background: linear-gradient(90deg, #4CAF50, #45a049);
+     width: 0%;
+     transition: width 0.5s ease;
+ }
+
+ @keyframes dropIn {
+     0% {
+         transform: scaleY(0);
+         opacity: 0;
+     }
+
+     100% {
+         transform: scaleY(1);
+         opacity: 1;
+     }
+ }
+
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+         transform: translateY(-20px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ .confetti {
+     position: fixed;
+     width: 10px;
+     height: 10px;
+     background: #f00;
+     position: absolute;
+     animation: confetti 1s ease-out forwards;
+     pointer-events: none;
+ }
+
+ @keyframes confetti {
+     0% {
+         transform: translateY(0) rotateZ(0deg);
+         opacity: 1;
+     }
+
+     100% {
+         transform: translateY(1000px) rotateZ(720deg);
+         opacity: 0;
+     }
+ } */
+
+
+
+  
+ * {
+   box-sizing: border-box;
+   font-family: 'Arial', sans-serif;
+ }
+
+ body {
+   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+   min-height: 100vh;
+   margin: 0;
+   padding: 20px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .container {
+   background: white;
+   border-radius: 15px;
+   padding: 20px;
+   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+   width: 90%;
+   max-width: 600px;
+   transform-origin: top;
+   animation: dropIn 0.6s ease-out;
+   position: relative;
+ }
+
+ .total-container {
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   display: flex;
+   align-items: center;
+   gap: 15px;
+ }
+
+ .total-amount {
+   font-size: 24px;
+   font-weight: bold;
+   color: #2c3e50;
+   transition: transform 0.3s ease;
+ }
+
+ .total-amount.pulse {
+   animation: pulseTotal 0.5s ease;
+ }
+
+ .character {
+   width: 60px;
+   height: 60px;
+   position: relative;
+   transition: transform 0.3s ease;
+ }
+
+ .character-face {
+   width: 100%;
+   height: 100%;
+   background: #FFD93D;
+   border-radius: 50%;
+   position: relative;
+   transition: transform 0.3s ease;
+ }
+
+ .eyes {
+   position: absolute;
+   top: 35%;
+   width: 100%;
+   display: flex;
+   justify-content: space-around;
+   padding: 0 15px;
+ }
+
+ .eye {
+   width: 8px;
+   height: 8px;
+   background: #333;
+   border-radius: 50%;
+   transition: all 0.3s ease;
+ }
+
+ .mouth {
+   position: absolute;
+   bottom: 25%;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 20px;
+   height: 10px;
+   border-bottom: 3px solid #333;
+   border-radius: 50%;
+   transition: all 0.3s ease;
+ }
+
+ /* Rest of your existing styles */
+ h1 {
+   color: #2c3e50;
+   text-align: center;
+   margin-bottom: 30px;
+   animation: fadeIn 1s ease-out;
+   margin-top: 40px;
+   font-size: 20px;
+   padding: 10px 0;
+ }
+
+ .item {
+   display: flex;
+   align-items: center;
+   padding: 15px;
+   margin: 10px 0;
+   border-radius: 10px;
+   background: #f8f9fa;
+   transform-origin: left;
+   transition: all 0.3s ease;
+   cursor: pointer;
+ }
+
+ .item:hover {
+   transform: scale(1.02);
+   background: #e9ecef;
+ }
+
+ .item.checked {
+   background: #d4edda;
+   text-decoration: line-through;
+   color: #666;
+ }
+
+ .checkbox {
+   width: 20px;
+   height: 20px;
+   margin-right: 15px;
+   border: 2px solid #6c757d;
+   border-radius: 5px;
+   display: inline-block;
+   position: relative;
+   transition: all 0.3s ease;
+ }
+
+ .checked .checkbox {
+   background: #28a745;
+   border-color: #28a745;
+ }
+
+ .checkbox::after {
+   content: '✓';
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: white;
+   opacity: 0;
+   transition: opacity 0.2s;
+ }
+
+ .checked .checkbox::after {
+   opacity: 1;
+ }
+
+ @keyframes dropIn {
+   0% {
+     transform: scaleY(0);
+     opacity: 0;
+   }
+   100% {
+     transform: scaleY(1);
+     opacity: 1;
+   }
+ }
+
+ @keyframes fadeIn {
+   from { opacity: 0; transform: translateY(-20px); }
+   to { opacity: 1; transform: translateY(0); }
+ }
+
+ @keyframes pulseTotal {
+   0% { transform: scale(1); }
+   50% { transform: scale(1.2); }
+   100% { transform: scale(1); }
+ }
+
+ @keyframes surprised {
+   0% { transform: scale(1); }
+   50% { transform: scale(1.2); }
+   100% { transform: scale(1); }
+ }
+
+ .price {
+   margin-left: auto;
+   font-weight: bold;
+   color: #2c3e50;
+ }
+ 
